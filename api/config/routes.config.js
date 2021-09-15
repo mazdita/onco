@@ -1,12 +1,13 @@
-const createError = require('http-errors');
+
 const express = require('express');
-const router = express.Router();
+const users = require('../controllers/user.controller');
 const secure = require('../middlewares/secure.mid');
 const item = require('../middlewares/item.mid');
 const items = require('../controllers/items.controller');
-const users = require('../controllers/user.controller');
+
 const order = require('../middlewares/order.mid');
 const orders = require('../controllers/order.controller');
+const router = express.Router();
 
 router.get('/items', items.list);
 
@@ -15,9 +16,11 @@ router.get('/items/:id', item.exists, items.detail);
 router.delete('/items/:id', item.exists, items.delete);
 router.put('/items/:id', item.exists, items.edit);
 
+
+// router.post('/users', users.login);
+router.post('/users', users.login);
 router.get('/users', secure.isAdmin, secure.isAuthenticated, users.list); 
 router.post('/register',secure.isNotAuthenticated, users.create);
-router.post('/users', users.login);
 router.post('/users',secure.isAuthenticated, users.logout);
 router.get('/authenticate/google', users.loginWithGoogle);
 router.get('/authenticate/google/cb', users.doLoginWithGoogle);

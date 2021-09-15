@@ -2,6 +2,22 @@ const createError = require('http-errors');
 const Item = require('../models/Item.model');
 
 module.exports.list = (req, res, next) => {
+  const { title, category } = req.query;
+  let criterial = {};
+
+  if (title) {
+      criterial.title = new RegExp(title, 'i');
+  }
+  if (category) {
+      criterial.category = category;
+  }
+
+
+  Item.find(criterial)
+      .then(items => res.json(items))
+      .catch(error => next(error))
+}
+/*module.exports.list = (req, res, next) => {
     Item.find()
     .then(items => 
       {
@@ -12,7 +28,7 @@ module.exports.list = (req, res, next) => {
       console.log("error", error);
       next(error)
     });
-}
+}*/
 
 module.exports.detail = (req, res, next) => res.json(req.item)
 

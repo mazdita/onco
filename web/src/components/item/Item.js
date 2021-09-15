@@ -1,4 +1,4 @@
-function OncoItem({title, image, price}) {
+function Item({title, image, price}) {
     return (
       <div className="card" style={{ width: "18rem" }}>
         <img className="card-img-top" src={image} alt={title} />
@@ -14,4 +14,4 @@ function OncoItem({title, image, price}) {
   }
   //imagen y título lleva a detalle item
   //cart suma +1 al carrito navbar
-  export default OncoItem;
+  export default Item;

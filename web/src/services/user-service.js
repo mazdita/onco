@@ -1,7 +1,8 @@
 
 import http from './base-api-services';
 
-const login = (email, password) => http.post('/login', { email, password })
+const login = ({email, password}) => 
+    http.post('/users', { email, password })
 
 const logout = () => http.post('/logout')
 
@@ -11,7 +12,7 @@ const register = (user) => {
     const data = new FormData()
 
     data.append('name', user.name)
-    data.append('name', user.surname)
+    data.append('surname', user.surname)
     data.append('email', user.email)
     data.append('password', user.password)
     

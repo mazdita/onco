@@ -64,11 +64,14 @@ passport.use(
       passwordField: "password",
     },
     (email, password, next) => {
+      console.log('passport1')
       User.findOne({ email })
         .then((user) => {
           if (!user) {
+            console.log('"Invalid email or password"')
             next(null, null, { email: "Invalid email or password" });
           } else {
+            console.log('user checkPassword', user)
             return user.checkPassword(password)
             .then(match => {
               if (match) {

@@ -6,12 +6,14 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const passport = require('passport');
 
-const app= express();
+
 
 require('./config/passport.config');
 require('./config/db.config');
 const cors = require('./config/cors.config');
 const session = require('./config/session.config');
+
+const app= express();
 
 /** Middlewares */
 app.use(logger('dev'));

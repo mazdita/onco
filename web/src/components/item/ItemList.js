@@ -1,66 +1,42 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import itemsService from '../../services/item-service';
-import OncoItem from "../../components/item/Onco-item";
+import Item from "./Item";
 import SearchBar from "../../components/item/SearchBar";
+//import ItemForm from '../ItemForm';
 
-function PlantList() {
-    const [items, setItems] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [search, setSearch] = useState('');
-    const [check, setCheck] = useState(false);
+function ItemList() {
+  const [items, setItems] = useState([]);
+  const [search, setSearch] = useState("");
 
-    useEffect(() => {
-        itemsService.list()
-            .then(items => setItems({ items })
-            )
-            .catch(error => {
-                setIsLoading(false)
-                console.error(error)
-            })
-    }, [])
 
-    function handleChange() {
-        setCheck(!check)
-    }
+  useEffect(() => {
+      itemsService
+          .list(search)
+          .then((data) => {
+            console.log('data', data)
+              setItems(data);
+          })
+          .catch((error) => console.error(error))
+  },[search]);
 
-    function handleSearch(text) {
-        setSearch(text)
-    }
-
-    const itemFiltered = items
-        .filter(item => {
-            return item.title.toLowerCase().includes(setSearch(search).toLowerCase())
-        })
-        .filter(item =>{
-            return item
-        })
-
-    return(
-        
-        <div className="container">
-            <div>
-                <h1>Find your Item</h1>
-            </div>
-            <div>
-                <SearchBar value={search} onSearch={handleSearch} />
-            </div>
-            <div class="btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                    <input onChange={handleChange} value={check} checked autocomplete={check ? "on" : "off"}/> Pet friendly
-                </label>
-            </div>
-            <h3>Featured items</h3>
-            {isLoading ? (<i className="fa fa-gear fa-spin"></i>) : (
-                <div className="row">
-                    <div className="col-6">
-                        {itemFiltered.map(item =>
-                            <OncoItem key={item.id} {...item} />
-                        )}
-                    </div>
-                </div>
-            )}
-        </div>
-    )
+  function handleSearch(text) {
+      setSearch(text);
 }
 
-export default PlantList;
+console.log('items.length', items.length)
+  return (
+      <div>
+      <SearchBar
+          value={search}
+          onChange={(text) => handleSearch(text)}
+      />
+      <ul className="container">
+          {items.length !== 0 &&
+              items.map((item) => (
+                  <Item {...item} key={item.id} />
+              ))}
+      </ul>
+  </div>
+  )
+}
+export default ItemList;

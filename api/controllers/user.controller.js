@@ -1,6 +1,7 @@
 const createError = require('http-errors');
-const User = require('../models/User.model')
 const passport = require('passport');
+const User = require('../models/User.model');
+
 
 module.exports.list = (req, res, next) => {
   User.find()
@@ -18,7 +19,16 @@ module.exports.detail = (req, res, next) => {
 };
 
 module.exports.create = (req, res, next) => {
-    User.findOne({ email: req.body.email })
+  const data = { title, email, password, picture } = req.body;
+
+  User.create({
+      ...req.body,
+      picture: req?.file?.path
+    })
+    .then((user) => res.status(201).json(user))
+    .catch((error) => next(error));
+  
+  /*User.findOne({ email: req.body.email })
       .then(user => {
         if (user) {
           next(createError(400, { errors: { email: 'This email already exists' } }))
@@ -30,7 +40,7 @@ module.exports.create = (req, res, next) => {
             .then(user => res.status(201).json(user))
         }
       })
-      .catch(next)
+      .catch(next)*/
   }
   
   module.exports.get = (req, res, next) => {
@@ -65,12 +75,15 @@ module.exports.create = (req, res, next) => {
   
   module.exports.login = (req, res, next) => {
     passport.authenticate('local-auth', (error, user, validations) => {
+      console.log('error', error)
+      console.log('validations', validations)
       if (error) {
         next(error);
       } else if (!user) {
-        next(createError(400, { errors: validations }))
+        next(createError(401, { errors: validations }))
       } else {
-        req.login(user, error => {
+        console.log('login')
+        req.login(user, (error) => {
           if (error) next(error)
           else res.json(user)
         })
@@ -95,11 +108,11 @@ module.exports.create = (req, res, next) => {
           if (error) {
             next(error)
           } else {
-            res.redirect('http://localhost:3000')
+            res.redirect(`${process.env.REACT_APP_URL}/google/cb`)
           }
         })
       }
-    })
-    
+    });
+  
     passportController(req, res, next);
-  }
+  };
