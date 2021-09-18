@@ -2,9 +2,11 @@ import {  useEffect, useState } from "react";
 import itemsService from '../../services/item-service';
 import Item from "./Item";
 import SearchBar from "../../components/item/SearchBar";
+import './ItemList.css';
+
 //import ItemForm from '../ItemForm';
 
-function ItemList() {
+function ItemList({onItemButtonClick}) {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -26,16 +28,22 @@ function ItemList() {
 console.log('items.length', items.length)
   return (
       <div>
-      <SearchBar
+          <div className="my-4">
+          <SearchBar
           value={search}
-          onChange={(text) => handleSearch(text)}
-      />
-      <ul className="container">
+          onSearch={handleSearch}
+            /> 
+          </div>
+      
+      <div className="row">
+      
           {items.length !== 0 &&
               items.map((item) => (
                   <Item {...item} key={item.id} />
               ))}
-      </ul>
+      
+      </div>
+      
   </div>
   )
 }

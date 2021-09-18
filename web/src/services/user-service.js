@@ -16,7 +16,7 @@ const register = (user) => {
     data.append('email', user.email)
     data.append('password', user.password)
     
-    return http.post('/register', data)}
+    return http.post('/register', user)}
 
 const service = {
     login,

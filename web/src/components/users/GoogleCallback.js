@@ -9,7 +9,7 @@ function GoogleCallback() {
   const auth = useContext(AuthContext);
   
   useEffect(() => {
-    service.getUser('me')
+    service.getProfile('me')
       .then(user => {
         auth.login(user);
         history.push('/');

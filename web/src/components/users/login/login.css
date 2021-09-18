@@ -1,0 +1,13 @@
+#img-login {
+  
+    background-position: 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    z-index: -1;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+  }
+  

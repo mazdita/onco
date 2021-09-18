@@ -8,6 +8,13 @@ function Register() {
   
     function handleSubmit(event) {
       event.preventDefault()
+
+      console.log(({
+        name: event.target.name.value,
+        surname: event.target.surname.value,
+        email: event.target.email.value,
+        password: event.target.password.value,
+    }));
   
       service.register({
           name: event.target.name.value,

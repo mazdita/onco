@@ -25,10 +25,15 @@ export function AuthContextProvider({ children }) {
         localStorage.setItem('user', user.id)
         setUser(user)
     }
+    function logout() {
+        localStorage.removeItem('user');
+        setUser(null)
+      }
 
     const value = {
         user,
-        login
+        login,
+        logout
     }
 
     return (

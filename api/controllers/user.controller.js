@@ -19,14 +19,16 @@ module.exports.detail = (req, res, next) => {
 };
 
 module.exports.create = (req, res, next) => {
-  const data = { title, email, password, picture } = req.body;
+  console.log('create', req.body)
+  const data = { name,surname , email, password, picture } = req.body;
 
   User.create({
       ...req.body,
-      picture: req?.file?.path
+      
     })
+  
     .then((user) => res.status(201).json(user))
-    .catch((error) => next(error));
+    .catch((error) => {console.log('error create', error); return next(error);});
   
   /*User.findOne({ email: req.body.email })
       .then(user => {
@@ -92,8 +94,8 @@ module.exports.create = (req, res, next) => {
   };
   
   module.exports.loginWithGoogle = (req, res, next) => {
-    const passportController = passport.authenticate('google-auth', {
-      scope: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'],
+    const passportController = passport.authenticate("google-auth", {
+      scope: ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile",],
     });
   
     passportController(req, res, next);

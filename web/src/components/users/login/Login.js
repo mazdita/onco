@@ -4,9 +4,9 @@ import { useContext , useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import service from "../../../services/user-service";
-import { useForm } from "react-hook-form";
 
-/*function Login() {
+/*
+function Login() {
 
   const history = useHistory()
   const auth = useContext(AuthContext)
@@ -115,10 +115,10 @@ function Login() {
     }
 
     return (
-        <div id="img-login" className="bg-dark py-5" style={{backgroundImage: "url(/img/loginbg.jpg)"}}>
+        <div id="img-login" className="bg-dark py-5" style={{backgroundImage: "url(/img/lazo.png)"}}>
           <div className="container">
             <div className="text-center">
-              <h1 className="heading mb-5">Onco</h1>
+              <h1 className="heading text-white mb-5">Wellcome Onconova</h1>
               <form onSubmit={handleSubmit}>
                 <div className="form-group mx-sm-3">
                   <label>Email</label> 
@@ -127,19 +127,19 @@ function Login() {
                   {error?.email && <div className="invalid-feedback">{error?.email}</div>}
                 </div>
   
-                <div className="form-group mx-sm-3">
+                <div className="form-group  mx-sm-3">
                   <label>Password</label> 
                   <input name="password" type="password" value={password} className="form-control col-md-2" 
                   placeholder="Password" onChange={e => setPassword(e.target.value)} />
                   {error?.password && <div className="invalid-feedback">{error?.password}</div>}
                 </div>
   
-                <button className="btn btn-primary btn-lg rounded-pill mt-3" type="submit">Log in</button>
+                <button className="btn btn-light btn-lg rounded-pill mt-3" type="submit">Log in</button>
+               <Link to="/register"><button className="btn btn-light btn-lg rounded-pill mt-3" type="submit">Register</button></Link>
               </form>
   
-              <a className="btn btn-primary btn-lg rounded-pill mt-4" href="http://localhost:3001/api/authenticate/google"><i className="fa fa-google"></i> Log in with Google</a>
+              <a className="btn btn-light btn-lg rounded-pill mt-4" href="http://localhost:3001/api/authenticate/google"><i className="fa fa-google"></i> Log in with Google</a>
               
-              <p className="mt-3">First time here? <Link to="/users"/>Register</p>
             </div>
           </div>
         </div>

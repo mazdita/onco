@@ -13,6 +13,9 @@ const userSchema = new Schema(
       type: String,
       required: "Name is required",
     },
+    surname:{
+      type:String
+    },
     email: {
       type: String,
       required: "email is required",
@@ -41,7 +44,7 @@ const userSchema = new Schema(
     },
     isAdmin:{
       type: Boolean,
-      default: false,
+      default: true,
     },
     address: String,
     city: String,
@@ -58,17 +61,6 @@ const userSchema = new Schema(
     }    
   }
 );
-
-userSchema.pre('save', function (next) {
-  if (this.isModified('password')) {
-      bcrypt.hash(this.password, 10).then((hash) => {
-      this.password = hash;
-      next();
-      });
-  } else {
-      next();
-  }
-});
 
 userSchema.pre('save', function (next) {
   if (this.isModified('password')) {

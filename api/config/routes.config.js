@@ -21,7 +21,7 @@ router.put('/items/:id', item.exists, items.edit);
 router.post('/users', users.login);
 router.get('/users', secure.isAdmin, secure.isAuthenticated, users.list); 
 router.post('/register',secure.isNotAuthenticated, users.create);
-router.post('/users',secure.isAuthenticated, users.logout);
+router.post('/logout',secure.isAuthenticated, users.logout);
 router.get('/authenticate/google', users.loginWithGoogle);
 router.get('/authenticate/google/cb', users.doLoginWithGoogle);
 

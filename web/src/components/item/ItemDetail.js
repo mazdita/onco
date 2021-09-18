@@ -1,39 +1,51 @@
 import { useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import {  useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useState } from "react/cjs/react.development";
 import itemsService from "../../services/item-service";
+import { useContext } from "react";
+import { CartContext } from "../../../src/contexts/CartContext";
 
-function ItemDetails() {
+/*function ItemDetails() {
 
     const [item, setItem] = useState(null);
-    const id = useParams();
+    const {id} = useParams();
     const history = useHistory();
+    const { createItem} = useContext(CartContext);
     
     useEffect(() => {
+        let isMounted = true;
         itemsService.detail(id)
-            .then(item => setItem(item))
-            .catch(error => {
-                console.error(error);
-                if (error.response?.status === 404) {
-                    history.push('/404');
+            .then(item => {
+                if (isMounted) {
+                    setItem(item)
                 }
             })
+        return () => isMounted = false;
     }, [id])
+    const handleCreateItem = () => {
+        createItem({
+            name: item.title,
+            price:item.price,
+            image: item.image,
+            id: item.id,
+            quantity: 1
+        })
+    }
 
     return item && (
-        <div className="container">
-            <div style={{backgroundImage: `url(${item.image})`}}></div>
-            <div className="card-body text-centered">
+
+        <div className="col-sm">
+            <div  className="item-image" style={{backgroundImage: `url(${item.image})`}}></div>
+            <div className="card-body text-centered ">
+                <img>{item.image}</img>
                 <h5 className="card-title">{item.title}</h5>
                 <p className="card-text">{item.price}€</p>
-                <button>Add to Cart</button>
+                <p className="card-text">{item.description}</p>
+                <button>Buy</button>
             </div>
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">{item.light}</li>
-                <li className="list-group-item">{item.water}</li>
-            </ul>
+            
         </div>
     )
 }
 
-export default ItemDetails;
+export default ItemDetails;*/
