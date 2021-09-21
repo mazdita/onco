@@ -5,47 +5,40 @@ import itemsService from "../../services/item-service";
 import { useContext } from "react";
 import { CartContext } from "../../../src/contexts/CartContext";
 
-/*function ItemDetails() {
 
-    const [item, setItem] = useState(null);
-    const {id} = useParams();
-    const history = useHistory();
-    const { createItem} = useContext(CartContext);
-    
-    useEffect(() => {
-        let isMounted = true;
-        itemsService.detail(id)
-            .then(item => {
-                if (isMounted) {
-                    setItem(item)
-                }
-            })
-        return () => isMounted = false;
-    }, [id])
-    const handleCreateItem = () => {
-        createItem({
-            name: item.title,
-            price:item.price,
-            image: item.image,
-            id: item.id,
-            quantity: 1
-        })
-    }
+   
 
+    function ItemDetails({  title, image, price,description}) {
+        const { createItem } = useContext(CartContext);
+        const [item, setItem] = useState(null);
+
+        useEffect(() => {
+            let isMounted = true;
+            itemsService.detail(id)
+                .then(item => {
+                    if (isMounted) {
+                        setItem(item)
+                    }
+                })
+            return () => isMounted = false;
+        }, [id])
+        
+      
     return item && (
 
         <div className="col-sm">
-            <div  className="item-image" style={{backgroundImage: `url(${item.image})`}}></div>
+            <div  className="item-image" ></div>
             <div className="card-body text-centered ">
                 <img>{item.image}</img>
                 <h5 className="card-title">{item.title}</h5>
                 <p className="card-text">{item.price}€</p>
                 <p className="card-text">{item.description}</p>
-                <button>Buy</button>
+                
+                <button >Buy</button>
             </div>
             
         </div>
     )
 }
 
-export default ItemDetails;*/
+export default ItemDetails;

@@ -20,7 +20,7 @@ function Item({id, title, image, onButtonClick, price, ...item}) {
     return (
       <div className="col-4 mb-2 ">
       <div className="card small-shadow">
-        <Link to={`/items/${id}`} {...item} > <img className="card-img-top img-fluid" src={image} alt={title}/> </Link>
+        <Link to={`/items/${id}`}  ><img className="card-img-top img-fluid"  src={image} alt={title}/></Link>
         <div className="card-body">
           <h5 className="card-title text-center">{title}</h5>
           <div className="d-flex justify-content-around">

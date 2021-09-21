@@ -138,7 +138,7 @@ function Login() {
                <Link to="/register"><button className="btn btn-light btn-lg rounded-pill mt-3" type="submit">Register</button></Link>
               </form>
   
-              <a className="btn btn-light btn-lg rounded-pill mt-4" href="http://localhost:3001/api/authenticate/google"><i className="fa fa-google"></i> Log in with Google</a>
+              <a className="btn btn-light btn-lg rounded-pill mt-4" href="http://localhost:3001/api/authenticate/google"><i className="fa fa-google"></i>  Google Log</a>
               
             </div>
           </div>

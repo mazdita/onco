@@ -9,7 +9,7 @@ import './Navbar.css';
 function Navbar({cartQuantity = 0}) {
     const history = useHistory();
     const auth = useContext(AuthContext);
-    const { cart, editItem, deleteItem, getCurrentQuantity } = useContext(CartContext);
+    const { cart } = useContext(CartContext);
 
     const [showUser, setShowUser] = useState(false);
 

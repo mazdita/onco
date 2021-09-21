@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import {AuthContext} from "../../../contexts/AuthContext";
+import service from "../../../services/user-service";
 
 function Profile () {
-    const auth = useContext(AuthContext)
+    const auth = useContext(AuthContext);
+    const  user  = AuthContext;
 
     return (
         <div className="container">
